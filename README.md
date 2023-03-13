@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+
 
 * Ruby version
 
+brew install rvm
+rvm install 2.7.4
+git clone
+
 * System dependencies
+  
+bundle install
 
 * Configuration
+  
+  bin/rails s
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
