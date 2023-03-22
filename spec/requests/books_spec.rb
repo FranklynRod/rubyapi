@@ -1,15 +1,19 @@
 require 'rails_helper'
 
 describe 'Books API', type: :request do
-    it "return all books" do
-        FactoryBot.create(:book, title:"Reyna", author:"Selam") 
-        FactoryBot.create(:book, title:"Franklyn", author:"Melley") 
-        get '/api/v1/books'
-        
-        expect(response).to have_http_status(:success)
-        expect(JSON.parse(response.body).size).to eq(2)
+
+    describe 'GET /books', appmap: true do
+        it "return all books" do
+            FactoryBot.create(:book, title:"Reyna", author:"Selam") 
+            FactoryBot.create(:book, title:"Franklyn", author:"Melley") 
+            get '/api/v1/books'
+            
+            expect(response).to have_http_status(:ok)
+            expect(JSON.parse(response.body).size).to eq(2)
+        end
     end
-    describe 'POST /books' do
+
+    describe 'POST /books', appmap: true do
         it 'creates a new book' do
             expect {
                 post '/api/v1/books', params: {book: {title: 'Lady Joker', author: 'Kaoru Takamura'}}
@@ -19,7 +23,7 @@ describe 'Books API', type: :request do
         end
     end
 
-    describe 'DELETE /books/:id' do
+    describe 'DELETE /books/:id', appmap: true do
         let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
         
         it 'deletes a book' do
@@ -30,4 +34,5 @@ describe 'Books API', type: :request do
         expect(response).to have_http_status(:no_content)
         end
     end
+    
 end

@@ -5,6 +5,7 @@ module Api
       def index
         render json: Book.all
       end
+      
       def create
         # book= Book.new(title:params[:title],author:params[:author])
         book= Book.new(book_params)
