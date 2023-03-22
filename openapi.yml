@@ -1,0 +1,116 @@
+# This document can be generated with the following command: 
+# npx @appland/appmap@latest openapi
+#
+# NOTE: You will need Node.js installed on your machine to run the above command
+#
+# Some helpful options:
+#   --output-file        output file name
+#   --openapi-title      title field of the OpenAPI document
+#   --openapi-version    version field of the OpenAPI document
+#
+# For more info, run:
+# npx @appland/appmap@latest openapi --help
+#
+# Visit our docs: https://appmap.io/docs/openapi.html
+#
+openapi: 3.0.1
+info:
+  title: My project
+  version: v1
+paths:
+  /api/v1/books:
+    get:
+      summary: return all books
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    author:
+                      type: string
+                    created_at:
+                      type: string
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    updated_at:
+                      type: string
+                example:
+                  - author: Selam
+                    title: Reyna
+                  - author: Melley
+                    title: Franklyn
+          description: OK
+    post:
+      summary: creates a new book
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  author:
+                    type: string
+                    example: Kaoru Takamura
+                  created_at:
+                    type: string
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                    example: Lady Joker
+                  updated_at:
+                    type: string
+          description: Created
+        '400':
+          content: {}
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                # author:
+                #   type: string
+                book:
+                  type: object
+                  properties:
+                    author:
+                      type: string
+                      example: Kaoru Takamura
+                    title:
+                      type: string
+                      example: Lady Joker
+                # title:
+                #   type: string
+  /api/v1/books/{id}:
+    delete:
+      summary: deletes a book
+      responses:
+        '204':
+          # content: {}
+          description: No Content
+        '404':
+          # content: {}
+          description: Not Found
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+            enum:
+              - 1
+              - 22
+              - 48
+          example: 15
+          required: true
+components: {}
+
+
