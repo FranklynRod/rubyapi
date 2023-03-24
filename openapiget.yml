@@ -26,45 +26,20 @@ paths:
             application/json; charset=utf-8:
               schema:
                 type: array
-                items: {}
-          description: OK
-    post:
-      responses:
-        '201':
-          content:
-            application/json; charset=utf-8:
-              schema:
-                type: object
-                properties:
-                  author:
-                    type: string
-                  created_at:
-                    type: string
-                  id:
-                    type: integer
-                  title:
-                    type: string
-                  updated_at:
-                    type: string
-          description: Created
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                book:
+                items:
                   type: object
                   properties:
                     author:
                       type: string
+                    created_at:
+                      type: string
+                    id:
+                      type: integer
                     title:
                       type: string
-                headers:
-                  type: object
-                  properties:
-                    Content-Type:
+                    updated_at:
                       type: string
+          description: OK
 components: {}
 
 

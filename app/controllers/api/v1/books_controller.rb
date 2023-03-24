@@ -3,13 +3,15 @@ module Api
     class BooksController < ApplicationController
       
       def index
-        render json: Book.all
+        books = Book.all
+        render json: books, status: :ok
       end
       
       def create
         # book= Book.new(title:params[:title],author:params[:author])
         book= Book.new(book_params)
         if book.save
+          p book
           render json: book, status: :created
         else
           render json: book.errors, status: :unprocessable_entity
