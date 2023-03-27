@@ -12,17 +12,17 @@ describe 'Books API', type: :request do
         end
     end
 
-    # describe 'POST /books', appmap: true do
-    #     context 'when create a book' do
-    #         it 'creates a new book' do
+    describe 'POST /books', appmap: true do
+        context 'when create a book' do
+            it 'creates a new book' do
                 
-    #             post '/api/v1/books', params: {book: {title: 'Lady Joker', author: 'Kaoru Takamura'}, headers: {"Content-Type" => "application/json"}}
-    #             res = JSON.parse(response.body)
-    #             expect(res).not_to be(nil)
-    #             expect(response).to have_http_status(:created)
-    #         end
-    #     end
-    # end
+                post '/api/v1/books', params: {book: {title: 'Lady Joker', author: 'Kaoru Takamura'}, headers: {"Content-Type" => "application/json"}}
+                res = JSON.parse(response.body)
+                expect(res).not_to be(nil)
+                expect(response).to have_http_status(:created)
+            end
+        end
+    end
 
     describe 'DELETE /books/:id', appmap: true do
         let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }

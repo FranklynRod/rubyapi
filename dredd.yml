@@ -1,7 +1,6 @@
 color: true
 dry-run: null
-# hookfiles: ./dredd_hook.rb
-hookfiles: 
+hookfiles: ./bin/dredd/dredd_hook.rb
 language: ruby
 require: null
 server: null
