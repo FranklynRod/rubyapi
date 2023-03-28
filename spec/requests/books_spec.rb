@@ -12,6 +12,20 @@ describe 'Books API', type: :request do
         end
     end
 
+    describe 'GET /books/:title/:id', appmap: true do
+        let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
+        context 'when we get a book by title and ID' do
+            it "returns a book by title and ID" do
+                get "/api/v1/books?title=#{book.title}&id=#{book.id}"
+                res = JSON.parse(response.body)
+
+                expect(response).to have_http_status(:ok)
+                expect(response.body).to include("The Martian")
+                expect(response.body).to include("1")
+            end
+        end
+    end
+
     describe 'POST /books', appmap: true do
         context 'when create a book' do
             it 'creates a new book' do

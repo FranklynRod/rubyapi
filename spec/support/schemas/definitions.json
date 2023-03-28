@@ -1,0 +1,21 @@
+{
+    "definitions": {
+        "book": {
+            "type": "object",
+            "required": [
+                "title",
+                "author",
+                "id",
+                "created_at",
+                "updated_at"
+            ],
+            "properties" : {
+                "title": {"type": "string"},
+                "author": {"type": "string"},
+                "id": {"type": "integer"},
+                "created_at": {"type":"string"},
+                "updated_at": {"type":"string"}
+            }
+        }
+    }
+}
