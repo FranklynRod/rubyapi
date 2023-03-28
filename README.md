@@ -1,21 +1,25 @@
 # README
 
+## Ruby version
 
+* brew install rvm
+* rvm install 2.7.4
+* git clone
 
-
-* Ruby version
-
-brew install rvm
-rvm install 2.7.4
-git clone
-
-* System dependencies
+## System dependencies
   
-bundle install
+* bundle install && rake db:migrate
 
-* Configuration
+## Install Dredd
   
-  bin/rails s
+* npm install dredd -g
+
+## Configuration
+  
+* bin/rails s
+* dredd
+
+
 
 
 

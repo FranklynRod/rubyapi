@@ -20,97 +20,49 @@ info:
 paths:
   /api/v1/books:
     get:
-      summary: return all books
       responses:
         '200':
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 type: array
-                items:
-                  type: object
-                  properties:
-                    author:
-                      type: string
-                    created_at:
-                      type: string
-                    id:
-                      type: integer
-                    title:
-                      type: string
-                    updated_at:
-                      type: string
-                example:
-                  - author: Selam
-                    title: Reyna
-                  - author: Melley
-                    title: Franklyn
+                items: {}
           description: OK
     post:
-      summary: creates a new book
       responses:
         '201':
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 type: object
                 properties:
                   author:
                     type: string
-                    example: Kaoru Takamura
                   created_at:
                     type: string
                   id:
                     type: integer
                   title:
                     type: string
-                    example: Lady Joker
                   updated_at:
                     type: string
           description: Created
-        '400':
-          content: {}
-          description: Bad Request
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                # author:
-                #   type: string
                 book:
                   type: object
                   properties:
                     author:
                       type: string
-                      example: Kaoru Takamura
                     title:
                       type: string
-                      example: Lady Joker
-                # title:
-                #   type: string
-  /api/v1/books/{id}:
-    delete:
-      summary: deletes a book
-      responses:
-        '204':
-          # content: {}
-          description: No Content
-        '404':
-          # content: {}
-          description: Not Found
-      parameters:
-        - name: id
-          in: path
-          schema:
-            type: string
-            enum:
-              - 1
-              - 22
-              - 48
-          example: 15
-          required: true
+                headers:
+                  type: object
+                  properties:
+                    Content-Type:
+                      type: string
 components: {}
-
-
