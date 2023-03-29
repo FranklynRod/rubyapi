@@ -10,10 +10,14 @@ module Api
         title = allowed_params[:title]
         id = allowed_params[:id]
         if title.present? && id.present?
-          render json: Book.find_by(title: title, id: id)
+          render json: Book.find_by!(title: title, id: id)
+          # find_by returns nil
+          # find_by! throws a NotFound exception
         else
           render json: Book.all
         end
+      rescue ActiveRecord::RecordNotFound => e
+        head :not_found
       end
       
       def allowed_params

@@ -6,7 +6,7 @@ describe 'Books API', type: :request do
         it "return all books" do 
             get '/api/v1/books'
             res = JSON.parse(response.body)
-            p res
+            # p res
             expect(response).to have_http_status(:ok)
             expect(res).not_to be(nil)
         end
@@ -16,13 +16,20 @@ describe 'Books API', type: :request do
         let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
         let!(:book) { FactoryBot.create(:book, title:'Night', author: 'Elie Wiesel') }
         context 'when we get a book by title and ID' do
+            it "returns not found with a missing title or ID" do
+                get "/api/v1/books?title=Hello&id=9999"
+                expect(response).to have_http_status(:not_found)
+            end
             it "returns a book by title and ID" do
                 get "/api/v1/books?title=#{book.title}&id=#{book.id}"
                 res = JSON.parse(response.body)
                 puts res
-                # puts response.body
                 expect(response).to have_http_status(:ok)
-                # expect(res.length).to eq(1)
+                expect(res).to have_key("title")
+                expect(res).to have_key("author")
+                expect(res).to have_key("id")
+                expect(res).to have_key("created_at")
+                expect(res).to have_key("updated_at")
                 expect(res["title"]).to eq(book.title)
             end
         end

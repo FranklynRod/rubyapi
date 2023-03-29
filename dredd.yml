@@ -28,5 +28,5 @@ hooks-worker-term-retry: 500
 hooks-worker-handler-host: 127.0.0.1
 hooks-worker-handler-port: 61321
 config: ./dredd.yml
-blueprint: openapi.yml
+blueprint: openapi2.yml
 endpoint: 'http://localhost:3000'
