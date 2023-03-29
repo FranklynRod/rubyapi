@@ -7,8 +7,10 @@ module Api
       # end
 
       def index
-        if params
-          render json: Book.find(params[:title][:id])
+        title = allowed_params[:title]
+        id = allowed_params[:id]
+        if title.present? && id.present?
+          render json: Book.find_by(title: title, id: id)
         else
           render json: Book.all
         end

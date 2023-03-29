@@ -14,17 +14,16 @@ describe 'Books API', type: :request do
 
     describe 'GET /books/:title/:id', appmap: true do
         let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
-        let!(:book2) { FactoryBot.create(:book, title:'Night', author: 'Elie Wiesel') }
+        let!(:book) { FactoryBot.create(:book, title:'Night', author: 'Elie Wiesel') }
         context 'when we get a book by title and ID' do
             it "returns a book by title and ID" do
                 get "/api/v1/books?title=#{book.title}&id=#{book.id}"
                 res = JSON.parse(response.body)
-                # puts res
+                puts res
                 # puts response.body
                 expect(response).to have_http_status(:ok)
-                expect(res.length).to eq(1)
-                expect(res[0]["title"]).to eq(book.title)
-                # expect(response.body).to include("1")
+                # expect(res.length).to eq(1)
+                expect(res["title"]).to eq(book.title)
             end
         end
     end
