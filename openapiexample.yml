@@ -23,7 +23,7 @@ paths:
       responses:
         '200':
           content:
-            application/json; charset=utf-8:
+            application/json:
               schema:
                 type: array
                 items: {}
@@ -45,7 +45,7 @@ paths:
       responses:
         '201':
           content:
-            application/json; charset=utf-8:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -62,7 +62,7 @@ paths:
           description: Created
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
@@ -78,18 +78,18 @@ paths:
                   properties:
                     Content-Type:
                       type: string
-  # /api/v1/books/{id}:
-  #   delete:
-  #     responses:
-  #       '204':
-  #         content: {}
-  #         description: No Content
-  #     parameters:
-  #       - name: id
-  #         in: path
-  #         schema:
-  #           type: string
-  #         required: true
+  /api/v1/books/{id}:
+    delete:
+      responses:
+        '204':
+          content: {}
+          description: No Content
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
 components: {}
 
 

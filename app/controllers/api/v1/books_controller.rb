@@ -11,8 +11,8 @@ module Api
         id = allowed_params[:id]
         if title.present? && id.present?
           render json: Book.find_by!(title: title, id: id)
-          # find_by returns nil
-          # find_by! throws a NotFound exception
+        #   find_by returns nil
+        #   find_by! throws a NotFound exception
         else
           render json: Book.all
         end
