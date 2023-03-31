@@ -28,6 +28,20 @@ paths:
                 type: array
                 items: {}
           description: OK
+        '404':
+          content:
+            text/html: {}
+          description: Not Found
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+        - name: title
+          in: query
+          schema:
+            type: string
+          # required: true
     post:
       responses:
         '201':
@@ -65,4 +79,18 @@ paths:
                   properties:
                     Content-Type:
                       type: string
+  # /api/v1/books/{id}:
+  #   delete:
+  #     responses:
+  #       '204':
+  #         content: {}
+  #         description: No Content
+  #     parameters:
+  #       - name: id
+  #         in: path
+  #         schema:
+  #           type: string
+  #         required: true
 components: {}
+
+
