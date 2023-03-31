@@ -30,13 +30,15 @@ before '/api/v1/books > GET > 200 > application/json; charset=utf-8' do |transac
   puts book.id
 end
 
-before '/api/v1/books > GET > 404 > text/html' do |transaction|
-  title_to_add = 1
-  id_to_add = "hello"
-  if transaction['fullPath'].include('?')
-    transaction['fullPath'] += "&" + id_to_add
+before '/api/v1/books > GET > 404 > text/html' do |transaction| 
+  param_to_add = "id=1"
+  transaction['fullPath'] += "?title=Franklyn&id=100"  
+  if transaction['fullPath'].include? "?" 
+    param_to_add="title=Franklyn"
+    transaction['fullPath'] += "&" + param_to_add 
   else
-    transaction['fullPath'] += "?" + title_to_add
+    param_to_add="id=2"
+    transaction['fullPath'] += "?" + param_to_add
   end
 end
 
@@ -50,16 +52,6 @@ before '/api/v1/books > POST > 201 > application/json; charset=utf-8' do |transa
   transaction['request']['body'] = request_body.to_json
 end
 
-# before '/api/v1/books > GET > 404 > application/json; charset=utf-8' do |transaction|
-#   response_body = {}
-#   param = {}
-
-#   param['title'] = ''
-#   param['id'] = 'hi'
-#   transaction['response']['body'] = response_body.to_json
-# end
-
-## Load Rails Server App
 require File.expand_path('../../config/environment', __dir__) 
 
 
