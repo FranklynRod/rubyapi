@@ -30,9 +30,28 @@ before '/api/v1/books > GET > 200 > application/json; charset=utf-8' do |transac
 end
 
 before '/api/v1/books > GET > 404 > text/html' do |transaction| 
+  book = stash['book']
+  add_params(transaction, "id", book.id)
+  add_params(transaction, "title", book.title)
 
-  transaction['fullPath'] += "?title=Franklyn&id=100"  
+  p "======================"
+  p transaction['fullPath']
+  p "======================"
+  # transaction['fullPath'] += "?title=Franklyn&id=100"  
 
+end
+
+# add query parameter to each transaction here
+def add_params(transaction, param, value)
+  param_to_add = "#{param}=#{value}"
+
+  if transaction['fullPath']['?']
+    transaction['fullPath'] += "&"
+  else
+    transaction['fullPath'] += "?"
+  end
+
+  transaction['fullPath'] += param_to_add
 end
 
 before '/api/v1/books > POST > 201 > application/json; charset=utf-8' do |transaction|
