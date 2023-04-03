@@ -23,7 +23,7 @@ paths:
       responses:
         '200':
           content:
-            application/json; charset=utf-8:
+            application/json:
               schema:
                 type: array
                 items: {}
@@ -41,12 +41,11 @@ paths:
           in: query
           schema:
             type: string
-          # required: true
     post:
       responses:
         '201':
           content:
-            application/json; charset=utf-8:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -63,7 +62,7 @@ paths:
           description: Created
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
@@ -90,7 +89,6 @@ paths:
           in: path
           schema:
             type: string
-          example: 1
           required: true
 components: {}
 

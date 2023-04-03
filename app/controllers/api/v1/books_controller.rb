@@ -31,8 +31,8 @@ module Api
 
       def destroy
         Book.find(params[:id]).destroy!
-
         head :no_content
+        # head :ok
       end
 
       private
