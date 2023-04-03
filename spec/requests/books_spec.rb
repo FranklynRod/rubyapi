@@ -19,24 +19,6 @@ describe 'Books API', type: :request do
         end
     end
 
-    # describe 'GET /books/:title', appmap: true do
-    #     let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
-    #     let!(:book) { FactoryBot.create(:book, title:'Night', author: 'Elie Wiesel') }
-    #     context 'when we get a book by title' do
-    #         it "returns a book by title" do
-    #             get "/api/v1/books?title=#{book.title}"
-    #             res = JSON.parse(response.body)
-    #             expect(response).to have_http_status(:ok)
-    #             expect(res).to have_key("title")
-    #             expect(res).to have_key("author")
-    #             expect(res).to have_key("id")
-    #             expect(res).to have_key("created_at")
-    #             expect(res).to have_key("updated_at")
-    #             expect(res["title"]).to eq(book.title)
-    #         end
-    #     end
-    # end
-
     describe 'GET /books/:title/:id', appmap: true do
         let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
         let!(:book1) { FactoryBot.create(:book, title:'Night', author: 'Elie Wiesel') }
