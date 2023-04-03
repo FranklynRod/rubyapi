@@ -23,26 +23,31 @@ paths:
       responses:
         "200":
           content:
-            application/json; charset=utf-8:
+            application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    author:
-                      type: string
-                    created_at:
-                      type: string
-                    id:
-                      type: integer
-                    title:
-                      type: string
-                    updated_at:
-                      type: string
+                type: object
+                properties:
+                  author:
+                    type: string
+                  created_at:
+                    type: string
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  updated_at:
+                    type: string
           description: OK
         "404":
           content:
-            text/html: {}
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
           description: Not Found
       parameters:
         - name: id
@@ -53,12 +58,11 @@ paths:
           in: query
           schema:
             type: string
-          # required: true
     post:
       responses:
         "201":
           content:
-            application/json; charset=utf-8:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -75,7 +79,7 @@ paths:
           description: Created
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
@@ -95,12 +99,13 @@ paths:
     delete:
       responses:
         "204":
+          content:
+            text/plain: {}
           description: No Content
       parameters:
         - name: id
           in: path
           schema:
             type: string
-          example: 1
           required: true
 components: {}

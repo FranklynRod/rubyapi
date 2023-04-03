@@ -61,7 +61,7 @@ describe 'Books API', type: :request do
             it 'deletes a book' do
                 delete "/api/v1/books/#{book.id}", params: {}
                 expect(response).to have_http_status(:no_content)
-                expect(response.body).to eq("")
+                expect(response.body).to be_empty
                 # expect(response).to have_http_status(:ok)
                 expect(Book.exists?(book.id)).to be false
                 expect(Book.count).to eq 0
