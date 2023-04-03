@@ -12,14 +12,15 @@ describe 'Books API', type: :request do
             res = JSON.parse(response.body)
             # puts res
             expect(response).to have_http_status(:ok)
-    
             expect(res.length).to eq(Book.count) 
-            expect(res.length).to eq(3)
-        
+            
+            # expect(res[0]).to eq(book.as_json)
+            # expect(res[1]).to eq(book1.as_json)
+            # expect(res[2]).to eq(book2.as_json)
         end
     end
 
-    describe 'GET /books/:title/:id', appmap: true do
+    describe 'GET /books?title&id', appmap: true do
         let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
         let!(:book1) { FactoryBot.create(:book, title:'Night', author: 'Elie Wiesel') }
         context 'when we get a book by title and ID' do
@@ -31,6 +32,7 @@ describe 'Books API', type: :request do
                 get "/api/v1/books?title=#{book.title}&id=#{book.id}"
                 res = JSON.parse(response.body)
                 expect(response).to have_http_status(:ok)
+                # expect(res).to eq(book.as_json)
                 expect(res["title"]).to eq(book.title)
                 expect(res["id"]).to eq(book.id)
                 expect(res["author"]).to eq(book.author)
@@ -47,10 +49,9 @@ describe 'Books API', type: :request do
             it 'creates a new book' do
                 post '/api/v1/books', params: {book: {title: 'Lady Joker', author: 'Kaoru Takamura'}, headers: {"Content-Type" => "application/json"}}
                 res = JSON.parse(response.body)
-                expect(res["title"]).to eq('Lady Joker')
-                expect(res["author"]).to eq('Kaoru Takamura')
                 expect(response).to have_http_status(:created)
-            
+                expect(res["title"]).to eq('Lady Joker')
+                expect(res["author"]).to eq('Kaoru Takamura')            
             end
         end
     end
@@ -60,6 +61,7 @@ describe 'Books API', type: :request do
             it 'deletes a book' do
                 delete "/api/v1/books/#{book.id}", params: {}
                 expect(response).to have_http_status(:no_content)
+                expect(response.body).to eq("")
                 # expect(response).to have_http_status(:ok)
                 expect(Book.exists?(book.id)).to be false
                 expect(Book.count).to eq 0
