@@ -10,6 +10,8 @@ module Api
           render json: Book.find_by!(title: title, id: id)
         elsif title.present? 
           render json: Book.find_by!(title: title)
+        elsif id.present? 
+          render json: Book.find_by!(id: id)
         else
           render json: Book.all 
         end
