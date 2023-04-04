@@ -1,4 +1,4 @@
-# This document can be generated with the following command:
+# This document can be generated with the following command: 
 # npx @appland/appmap@latest openapi
 #
 # NOTE: You will need Node.js installed on your machine to run the above command
@@ -21,9 +21,9 @@ paths:
   /api/v1/books:
     get:
       responses:
-        "200":
+        '200':
           content:
-            application/json; charset=utf-8:
+            application/json:
               schema:
                 type: array
                 items:
@@ -40,10 +40,9 @@ paths:
                     updated_at:
                       type: string
           description: OK
-        "404":
+        '404':
           content:
-            # text/html: {}
-            application/json; charset=utf-8:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -61,12 +60,11 @@ paths:
           in: query
           schema:
             type: string
-          # required: true
     post:
       responses:
-        "201":
+        '201':
           content:
-            application/json; charset=utf-8:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -83,7 +81,7 @@ paths:
           description: Created
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
@@ -102,13 +100,16 @@ paths:
   /api/v1/books/{id}:
     delete:
       responses:
-        "204":
+        '204':
+          content:
+            text/plain: {}
           description: No Content
       parameters:
         - name: id
           in: path
           schema:
             type: string
-          example: 1
           required: true
 components: {}
+
+

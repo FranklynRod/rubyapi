@@ -16,6 +16,17 @@ module Api
         render json: {errors: true, errors: [e.message]}, status: :not_found
       end
 
+      def index
+        title = allowed_params[:title]
+        if title.present?
+          render json: Book.find_by!(title: title)
+        else 
+          render json: Book.all 
+        end
+      rescue ActiveRecord::RecordNotFound => e
+        render json: {errors: true, errors: [e.message]}, status: :not_found
+      end
+
       def allowed_params
         params.permit(:title, :id)
       end

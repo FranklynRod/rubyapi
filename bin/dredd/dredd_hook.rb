@@ -29,14 +29,17 @@ before '/api/v1/books > GET > 200 > application/json; charset=utf-8' do |transac
   puts book.id
 end
 
-before '/api/v1/books > GET > 404 > text/html' do |transaction| 
+before '/api/v1/books > GET > 404 > application/json; charset=utf-8' do |transaction| 
   book = stash['book']
-  add_params(transaction, "id", book.id)
-  add_params(transaction, "title", book.title)
+  # add_params(transaction, "id", book.id)
+  # add_params(transaction, "title", book.title)
 
-  p "======================"
-  p transaction['fullPath']
-  p "======================"
+  add_params(transaction, "id", 99999)
+  add_params(transaction, "title", "Unknown")
+
+  # p "======================"
+  # p transaction['fullPath']
+  # p "======================"
   # transaction['fullPath'] += "?title=Franklyn&id=100"  
 
 end
@@ -53,6 +56,20 @@ def add_params(transaction, param, value)
 
   transaction['fullPath'] += param_to_add
 end
+
+
+# before '/api/v1/books?title > GET > 200 > application/json; charset=utf-8' do |transaction|
+#   book = stash['book']
+#   puts book.title
+# end
+
+# before '/api/v1/books?title > GET > 404 > application/json; charset=utf-8' do |transaction| 
+#   book = stash['book']
+#   # add_params(transaction, "title", "Unknown")
+#   transaction['fullPath'] += "?title=Unknown" 
+
+# end
+
 
 before '/api/v1/books > POST > 201 > application/json; charset=utf-8' do |transaction|
   request_body = {}
