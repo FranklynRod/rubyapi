@@ -5,22 +5,12 @@ module Api
       def index
         title = allowed_params[:title]
         id = allowed_params[:id]
-        # if title.present? 
-        #   render json: Book.find_by!(title: title)
+        
         if title.present? && id.present?
           render json: Book.find_by!(title: title, id: id)
-        else 
-          render json: Book.all 
-        end
-      rescue ActiveRecord::RecordNotFound => e
-        render json: {errors: true, errors: [e.message]}, status: :not_found
-      end
-
-      def index
-        title = allowed_params[:title]
-        if title.present?
+        elsif title.present? 
           render json: Book.find_by!(title: title)
-        else 
+        else
           render json: Book.all 
         end
       rescue ActiveRecord::RecordNotFound => e

@@ -24,29 +24,34 @@ before_all do |transactions|
   stash['book'] = book
 end
 
-before '/api/v1/books > GET > 200 > application/json; charset=utf-8' do |transaction|
-  book = stash['book']
-  puts book.id
-end
+# before '/api/v1/books > GET > 200 > application/json; charset=utf-8' do |transaction|
+#   book = stash['book']
+#   puts book.id
+# end
 
-before '/api/v1/books > GET > 404 > application/json; charset=utf-8' do |transaction| 
-  book = stash['book']
-  # add_params(transaction, "id", book.id)
-  # add_params(transaction, "title", book.title)
+# before '/api/v1/books > GET > 404 > application/json; charset=utf-8' do |transaction| 
+#   book = stash['book']
+#   # add_params(transaction, "id", book.id)
+#   # add_params(transaction, "title", book.title)
 
-  add_params(transaction, "id", 99999)
-  add_params(transaction, "title", "Unknown")
+#   add_params(transaction, "id", 99999)
+#   add_params(transaction, "title", "Unknown")
 
-  # p "======================"
-  # p transaction['fullPath']
-  # p "======================"
-  # transaction['fullPath'] += "?title=Franklyn&id=100"  
+#   # p "======================"
+#   # p transaction['fullPath']
+#   # p "======================"
+#   # transaction['fullPath'] += "?title=Franklyn&id=100"  
 
-end
+# end
 
 # add query parameter to each transaction here
 def add_params(transaction, param, value)
-  param_to_add = "#{param}=#{value}"
+  # param_to_add = "#{param}=#{value}"
+  if param == "title"
+    param_to_add = "title=#{value}"
+  else
+    param_to_add = "#{param}=#{value}"
+  end
 
   if transaction['fullPath']['?']
     transaction['fullPath'] += "&"
@@ -58,17 +63,18 @@ def add_params(transaction, param, value)
 end
 
 
-# before '/api/v1/books?title > GET > 200 > application/json; charset=utf-8' do |transaction|
-#   book = stash['book']
-#   puts book.title
-# end
+before '/api/v1/books?title > GET > 200 > application/json; charset=utf-8' do |transaction|
+  book = stash['book']
+  puts book.title
+end
 
-# before '/api/v1/books?title > GET > 404 > application/json; charset=utf-8' do |transaction| 
-#   book = stash['book']
-#   # add_params(transaction, "title", "Unknown")
-#   transaction['fullPath'] += "?title=Unknown" 
+before '/api/v1/books > GET > 404 > application/json; charset=utf-8' do |transaction| 
+  book = stash['book']
+  # add_params(transaction, "title", book.title)
+  add_params(transaction, "title", "Unknown")
+  # transaction['fullPath'] += "?title=Franklyn" 
 
-# end
+end
 
 
 before '/api/v1/books > POST > 201 > application/json; charset=utf-8' do |transaction|
