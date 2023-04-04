@@ -52,6 +52,22 @@ describe 'Books API', type: :request do
         end
     end
 
+    describe 'GET /books?id', appmap: true do
+        let!(:book) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
+        let!(:book1) { FactoryBot.create(:book, title:'Night', author: 'Elie Wiesel') }
+        context 'when we get a book by id' do
+            it "returns not found with a missing id" do
+                get "/api/v1/books?id=99999"
+                expect(response).to have_http_status(:not_found)
+            end
+            it "returns a book by id" do
+                get "/api/v1/books?id=#{book.id}"
+                res = JSON.parse(response.body)
+                expect(response).to have_http_status(:ok)
+                expect(res).to eq(book.as_json)
+            end
+        end
+    end
 
     describe 'POST /books', appmap: true do
         context 'when create a book' do
