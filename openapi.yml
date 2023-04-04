@@ -42,7 +42,15 @@ paths:
           description: OK
         "404":
           content:
-            text/html: {}
+            # text/html: {}
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
           description: Not Found
       parameters:
         - name: id
