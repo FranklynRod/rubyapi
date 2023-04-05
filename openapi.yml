@@ -81,6 +81,21 @@ paths:
                   updated_at:
                     type: string
           description: Created
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  # title:
+                  #   type: array
+                  #   items:
+                  #     type: string
+                  author:
+                    type: array
+                    items:
+                      type: string
+          description: Unprocessable Entity
       requestBody:
         content:
           application/json:

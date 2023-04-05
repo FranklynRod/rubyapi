@@ -78,6 +78,10 @@ describe 'Books API', type: :request do
                 expect(res["title"]).to eq('Lady Joker')
                 expect(res["author"]).to eq('Kaoru Takamura')            
             end
+            it 'returns error status code for invalid request' do
+                post '/api/v1/books', params: {book: {title: ""}, headers: {"Content-Type" => "application/json"}}
+                expect(response).to have_http_status(:unprocessable_entity)
+            end
         end
     end
 

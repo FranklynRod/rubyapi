@@ -86,6 +86,16 @@ before '/api/v1/books > POST > 201 > application/json; charset=utf-8' do |transa
   transaction['request']['body'] = request_body.to_json
 end
 
+before '/api/v1/books > POST > 422 > application/json; charset=utf-8' do |transaction|
+  request_body = {}
+  param = {}
+
+  # param['title'] = ""
+  param['author'] = "1234"
+  request_body['book'] = param
+  transaction['request']['body'] = request_body.to_json
+end
+
 before '/api/v1/books/{id} > DELETE > 204 > ' do |transaction|
   book = stash['book']
   transaction['fullPath'] = "/api/v1/books/#{book.id}"
