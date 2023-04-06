@@ -83,7 +83,7 @@ paths:
           description: Created
         '422':
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 type: object
                 properties:
