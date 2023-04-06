@@ -65,13 +65,6 @@ end
 # add query parameter to each transaction here
 def add_params(transaction, param, value)
   param_to_add = "#{param}=#{value}"
-  if param == "id"
-    param_to_add = "id=#{value}"
-  elsif param == "title"
-    param_to_add = "title=#{value}"
-  else
-    param_to_add = "#{param}=#{value}"
-  end
 
   if transaction['fullPath']['?']
     transaction['fullPath'] += "&"
