@@ -6,15 +6,21 @@ describe 'Books API', type: :request do
     describe 'GET /books', appmap: true do
         let!(:book1) { FactoryBot.create(:book, title:'The Martian', author: 'Andy Weir') }
         let!(:book2) { FactoryBot.create(:book, title:'Night', author: 'Elie Wiesel') }
-        it "return all books" do 
-            # binding.pry 
-            get '/api/v1/books'
-            res = JSON.parse(response.body)
-            expect(response).to have_http_status(:ok)
-            expect(res.length).to eq(Book.count) 
-            expect(res[0]).to eq(book.as_json)
-            expect(res[1]).to eq(book1.as_json)
-            expect(res[2]).to eq(book2.as_json)
+        context 'when we get a book' do
+            it "returns internal server error with cannot connect to the db" do
+                get "/api/v1/books"
+                expect(response).to have_http_status(:internal_server_error) 
+            end
+            it "return all books" do 
+                # binding.pry 
+                get '/api/v1/books'
+                res = JSON.parse(response.body)
+                expect(response).to have_http_status(:ok)
+                expect(res.length).to eq(Book.count) 
+                expect(res[0]).to eq(book.as_json)
+                expect(res[1]).to eq(book1.as_json)
+                expect(res[2]).to eq(book2.as_json)
+            end
         end
     end
 

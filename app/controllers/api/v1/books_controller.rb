@@ -17,6 +17,9 @@ module Api
         end
       rescue ActiveRecord::RecordNotFound => e
         render json: {errors: true, errors: [e.message]}, status: :not_found
+
+      rescue ActiveRecord::ConnectionNotEstablished => e
+        render json: {errors: true, errors: [e.message]}, status: :internal_server_error
       end
 
       def allowed_params
@@ -35,6 +38,8 @@ module Api
       def destroy
         Book.find(params[:id]).destroy!
         render body: nil, status: :no_content
+      # rescue ActiveRecord::ConnectionNotEstablished => e
+      #   render json: {errors: true, errors: [e.message]}, status: :internal_server_error
         # render json: {result: true, status: :no_content}
         # head :no_content
         # head :ok
