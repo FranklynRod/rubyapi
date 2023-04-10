@@ -45,7 +45,6 @@ module Api
         render json: {errors: true, errors: [e.message]}, status: :internal_server_error
         # render json: {result: true, status: :no_content}
         # head :no_content
-        # head :ok
       end
 
       private
