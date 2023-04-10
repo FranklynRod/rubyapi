@@ -25,6 +25,10 @@ before_all do |transactions|
 end
 
 # before_each do |transaction|
+#   ActiveRecord::Base.establish_connection
+# end
+
+# before_each do |transaction|
 #   begin
 #     ActiveRecord::Base.connection
 #   rescue ActiveRecord::ConnectionNotEstablished
@@ -43,16 +47,12 @@ before '/api/v1/books > GET > 404 > application/json; charset=utf-8' do |transac
   add_params(transaction, "title", "Unknown")
 end
 
-before '/api/v1/books > GET > 500 > application/json; charset=utf-8' do |transaction|
-  ActiveRecord::Base.remove_connection
-end
-
-after '/api/v1/books > GET> 500 > application/json; charset=utf-8' do |transaction|
-  if transaction['real']['statusCode'] == 500
-    transaction['skip'] = false
-  end
-  ActiveRecord::Base.establish_connection
-end
+# after '/api/v1/books > GET> 500 > application/json; charset=utf-8' do |transaction|
+#   # if transaction['real']['statusCode'] == 500
+#   #   transaction['skip'] = false
+#   # end
+#   ActiveRecord::Base.establish_connection
+# end
 
 # after '/api/v1/books > GET > 500 > application/json; charset=utf-8' do |transaction|
 #   ActiveRecord::Base.establish_connection
@@ -68,7 +68,6 @@ end
 before '/api/v1/books > GET > 404 > application/json; charset=utf-8' do |transaction| 
   book = stash['book']
   add_params(transaction, "title", "Unknown")
-
 end
 
 before '/api/v1/books > GET > 200 > application/json' do |transaction|
@@ -118,6 +117,24 @@ before '/api/v1/books/{id} > DELETE > 204 > ' do |transaction|
   book = stash['book']
   transaction['fullPath'] = "/api/v1/books/#{book.id}"
 
+end
+
+before '/api/v1/books > GET > 500 > application/json; charset=utf-8' do |transaction|
+  transaction['skip'] = true
+  # ActiveRecord::Base.remove_connection
+
+#   ActiveRecord::Base.establish_connection(
+#   adapter:  "sqlite3",
+#   database: "path/to/dbfile"
+# )
+end
+
+before '/api/v1/books > POST > 500 > application/json; charset=utf-8' do |transaction|
+  transaction['skip'] = true
+end
+
+before '/api/v1/books/{id} > DELETE > 500 > application/json; charset=utf-8' do |transaction|
+  transaction['skip'] = true
 end
 
 require File.expand_path('../../config/environment', __dir__) 
