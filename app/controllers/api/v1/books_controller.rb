@@ -43,8 +43,6 @@ module Api
 
       rescue ActiveRecord::ConnectionNotEstablished => e
         render json: {errors: true, errors: [e.message]}, status: :internal_server_error
-        # render json: {result: true, status: :no_content}
-        # head :no_content
       end
 
       private
